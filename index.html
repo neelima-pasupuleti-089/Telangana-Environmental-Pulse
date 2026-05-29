@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telangana Environmental Pulse</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/1999/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛰️</text></svg>">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 font-sans flex h-screen overflow-hidden text-gray-100">
+
+    <aside class="w-96 bg-gray-800 shadow-2xl flex flex-col z-20 relative border-r border-gray-700">
+        <div class="p-6 border-b border-gray-700 bg-gray-850">
+            <h1 class="text-2xl font-black tracking-tight bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 bg-clip-text text-transparent">
+                🌍 Telangana Pulse
+            </h1>
+            <p class="text-xs text-gray-400 mt-1 uppercase tracking-widest font-semibold">Spatio-Temporal Audit Dashboard</p>
+        </div>
+        
+        <div class="p-5 flex-grow overflow-y-auto space-y-5">
+            
+            <div>
+                <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Core Metadata</h3>
+                <div class="bg-gradient-to-br from-gray-900 to-gray-800 p-4 rounded-xl border border-gray-700 shadow-md">
+                    <p class="text-xs text-green-300 font-medium tracking-wide uppercase">Timeline Range</p>
+                    <p class="text-xl text-green-400 font-extrabold mt-0.5">2018 — 2025</p>
+                </div>
+            </div>
+
+            <div class="bg-red-950/40 border border-red-500/40 rounded-xl p-4 shadow-lg">
+                <div class="flex items-center space-x-2 text-red-400 font-bold text-sm mb-1">
+                    <span class="flex h-2 w-2 relative">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                    </span>
+                    <span>State Environmental Sync Active</span>
+                </div>
+                <p class="text-xs text-gray-300 leading-relaxed">
+                    Data models track urban heat intensity and localized <span class="text-purple-300 font-semibold">NO₂ corridors</span> across all 33 administrative subdivisions.
+                </p>
+            </div>
+
+            <div>
+                <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Select Target District (33 Available)</h3>
+                
+                <select id="districtDropdown" onchange="updateDistrictTable()" class="w-full bg-gray-900 border border-gray-700 text-gray-200 rounded-xl p-3 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all mb-4 cursor-pointer">
+                    <option value="adilabad">Adilabad</option>
+                    <option value="bhadradri">Bhadradri Kothagudem</option>
+                    <option value="hanumakonda">Hanumakonda</option>
+                    <option value="hyderabad" selected>Hyderabad Metro</option>
+                    <option value="jagtial">Jagtial</option>
+                    <option value="jangaon">Jangaon</option>
+                    <option value="jayashankar">Jayashankar Bhupalpally</option>
+                    <option value="gadwal">Jogulamba Gadwal</option>
+                    <option value="kamareddy">Kamareddy</option>
+                    <option value="karimnagar">Karimnagar Industrial Belt</option>
+                    <option value="khammam">Khammam Agricultural Zone</option>
+                    <option value="asifabad">Kumuram Bheem Asifabad</option>
+                    <option value="mahabubabad">Mahabubabad</option>
+                    <option value="mahabubnagar">Mahabubnagar</option>
+                    <option value="mancherial">Mancherial</option>
+                    <option value="medak">Medak</option>
+                    <option value="medchal">Medchal-Malkajgiri</option>
+                    <option value="mulugu">Mulugu</option>
+                    <option value="nagarkurnool">Nagarkurnool</option>
+                    <option value="nalgonda">Nalgonda</option>
+                    <option value="narayanpet">Narayanpet</option>
+                    <option value="nirmal">Nirmal</option>
+                    <option value="nizamabad">Nizamabad Region</option>
+                    <option value="peddapalli">Peddapalli</option>
+                    <option value="sircilla">Rajanna Sircilla</option>
+                    <option value="rangareddy">Rangareddy</option>
+                    <option value="sangareddy">Sangareddy</option>
+                    <option value="siddipet">Siddipet</option>
+                    <option value="suryapet">Suryapet</option>
+                    <option value="vikarabad">Vikarabad</option>
+                    <option value="wanaparthy">Wanaparthy</option>
+                    <option value="warangal">Warangal District</option>
+                    <option value="yadadri">Yadadri Bhuvanagiri</option>
+                </select>
+
+                <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Diagnostic 5-Layer Status</h3>
+                <div class="bg-gray-800/50 rounded-xl border border-gray-700 overflow-hidden shadow-inner">
+                    <table class="w-full text-left text-xs">
+                        <thead class="bg-gray-700/50 text-gray-300 font-semibold border-b border-gray-700">
+                            <tr>
+                                <th class="p-3">Target Layer Indicator</th>
+                                <th class="p-3 text-right">Current Status</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-700/40 text-gray-300">
+                            <tr class="hover:bg-gray-700/10">
+                                <td class="p-3 font-medium text-gray-300">1. NO₂ Air Quality</td>
+                                <td class="p-3 text-right"><span id="layer-no2" class="px-2 py-0.5 rounded font-bold text-[10px]">--</span></td>
+                            </tr>
+                            <tr class="hover:bg-gray-700/10">
+                                <td class="p-3 font-medium text-gray-300">2. Thermal Profile (LST)</td>
+                                <td class="p-3 text-right"><span id="layer-lst" class="px-2 py-0.5 rounded font-bold text-[10px]">--</span></td>
+                            </tr>
+                            <tr class="hover:bg-gray-700/10">
+                                <td class="p-3 font-medium text-gray-300">3. Vegetation Index (NDVI)</td>
+                                <td class="p-3 text-right"><span id="layer-ndvi" class="px-2 py-0.5 rounded font-bold text-[10px]">--</span></td>
+                            </tr>
+                            <tr class="hover:bg-gray-700/10">
+                                <td class="p-3 font-medium text-gray-300">4. Water Resource (NDWI)</td>
+                                <td class="p-3 text-right"><span id="layer-ndwi" class="px-2 py-0.5 rounded font-bold text-[10px]">--</span></td>
+                            </tr>
+                            <tr class="hover:bg-gray-700/10">
+                                <td class="p-3 font-medium text-gray-300">5. Soil Moisture (SMI)</td>
+                                <td class="p-3 text-right"><span id="layer-smi" class="px-2 py-0.5 rounded font-bold text-[10px]">--</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="p-4 border-t border-gray-700 bg-gray-850 text-[10px] text-gray-500 flex justify-between items-center">
+            <span>Sensors: Copernicus / Sentinel</span>
+            <span class="bg-gray-700 px-2 py-0.5 rounded text-gray-300 font-medium">Felt Core Engine</span>
+        </div>
+    </aside>
+
+    <main class="flex-1 flex flex-col relative z-10 bg-gray-900">
+        <header class="bg-gray-800 border-b border-gray-700 p-4 flex justify-between items-center z-10 shadow-md">
+            <h2 class="text-md font-bold text-gray-200 tracking-wide">🛰️ Interactive Environmental Diagnostic Spatial Sandbox</h2>
+            <span class="text-xs bg-emerald-500/10 text-emerald-400 font-semibold px-2.5 py-1 rounded-full border border-emerald-500/20 shadow-sm animate-pulse">
+                Live Spatial Sync Active
+            </span>
+        </header>
+        
+        <div class="flex-1 w-full h-full bg-gray-950">
+            <iframe 
+                src="https://felt.com/embed/map/Telanganas-Landscape-Dynamics-AT0KCFM9BQl2opWct3DC9APA?loc=32.1%2C-26.96%2C2.77z" 
+                width="100%" 
+                height="100%" 
+                frameborder="0" 
+                style="border:0;" 
+                allowfullscreen="">
+            </iframe>
+        </div>
+    </main>
+
+    <script>
+        // Design Token Styles for Quick Reuse
+        const CRITICAL = { text: "CRITICAL ALERT", style: "bg-red-900/60 text-red-300 border border-red-500/30" };
+        const ELEVATED = { text: "ELEVATED LEVEL", style: "bg-amber-900/60 text-amber-300 border border-amber-500/30" };
+        const MODERATE = { text: "MODERATE RISK", style: "bg-yellow-900/60 text-yellow-300 border border-yellow-500/30" };
+        const STABLE   = { text: "STABLE PROFILE", style: "bg-green-900/40 text-green-300 border border-green-500/20" };
+        const OPTIMAL  = { text: "OPTIMAL STATUS", style: "bg-green-900/60 text-green-300 border border-green-500/30" };
+        const ABUNDANT = { text: "HIGH DENSITY", style: "bg-blue-900/50 text-blue-300 border border-blue-500/30" };
+        const SCARCE   = { text: "SCARCE COV", style: "bg-orange-900/60 text-orange-300 border border-orange-500/30" };
+
+        const districtDatabase = {
+            adilabad: { no2: OPTIMAL, lst: MODERATE, ndvi: OPTIMAL, ndwi: STABLE, smi: STABLE },
+            bhadradri: { no2: ELEVATED, lst: ELEVATED, ndvi: OPTIMAL, ndwi: ABUNDANT, smi: OPTIMAL },
+            hanumakonda: { no2: ELEVATED, lst: ELEVATED, ndvi: MODERATE, ndwi: STABLE, smi: MODERATE },
+            hyderabad: { no2: CRITICAL, lst: CRITICAL, ndvi: SCARCE, ndwi: SCARCE, smi: SCARCE },
+            jagtial: { no2: STABLE, lst: MODERATE, ndvi: OPTIMAL, ndwi: ABUNDANT, smi: OPTIMAL },
+            jangaon: { no2: STABLE, lst: ELEVATED, ndvi: MODERATE, ndwi: MODERATE, smi: MODERATE },
+            jayashankar: { no2: STABLE, lst: MODERATE, ndvi: OPTIMAL, ndwi: ABUNDANT, smi: OPTIMAL },
+            gadwal: { no2: STABLE, lst: CRITICAL, ndvi: MODERATE, ndwi: SCARCE, smi: SCARCE },
+            kamareddy: { no2: OPTIMAL, lst: MODERATE, ndvi: OPTIMAL, ndwi: STABLE, smi: STABLE },
+            karimnagar: { no2: ELEVATED, lst: ELEVATED, ndvi: STABLE, ndwi: STABLE, smi: STABLE },
+            khammam: { no2: MODERATE, lst: MODERATE, ndvi: OPTIMAL, ndwi: ABUNDANT, smi: OPTIMAL },
+            asifabad: { no2: OPTIMAL, lst: STABLE, ndvi: OPTIMAL, ndwi: OPTIMAL, smi: OPTIMAL },
+            mahabubabad: { no2: OPTIMAL, lst: MODERATE, ndvi: OPTIMAL, ndwi: STABLE, smi: STABLE },
+            mahabubnagar: { no2: MODERATE, lst: ELEVATED, ndvi: MODERATE, ndwi: MODERATE, smi: MODERATE },
+            mancherial: { no2: ELEVATED, lst: ELEVATED, ndvi: OPTIMAL, ndwi: STABLE, smi: STABLE },
+            medak: { no2: MODERATE, lst: MODERATE, ndvi: OPTIMAL, ndwi: STABLE, smi: STABLE },
+            medchal: { no2: CRITICAL, lst: CRITICAL, ndvi: SCARCE, ndwi: MODERATE, smi: MODERATE },
+            mulugu: { no2: OPTIMAL, lst: STABLE, ndvi: OPTIMAL, ndwi: ABUNDANT, smi: OPTIMAL },
+            nagarkurnool: { no2: OPTIMAL, lst: MODERATE, ndvi: OPTIMAL, ndwi: STABLE, smi: OPTIMAL },
+            nalgonda: { no2: MODERATE, lst: ELEVATED, ndvi: MODERATE, ndwi: STABLE, smi: MODERATE },
+            narayanpet: { no2: STABLE, lst: ELEVATED, ndvi: MODERATE, ndwi: SCARCE, smi: MODERATE },
+            nirmal: { no2: OPTIMAL, lst: MODERATE, ndvi: OPTIMAL, ndwi: STABLE, smi: STABLE },
+            nizamabad: { no2: OPTIMAL, lst: MODERATE, ndvi: OPTIMAL, ndwi: ABUNDANT, smi: OPTIMAL },
+            peddapalli: { no2: ELEVATED, lst: ELEVATED, ndvi: STABLE, ndwi: STABLE, smi: STABLE },
+            sircilla: { no2: STABLE, lst: MODERATE, ndvi: OPTIMAL, ndwi: STABLE, smi: STABLE },
+            rangareddy: { no2: CRITICAL, lst: CRITICAL, ndvi: MODERATE, ndwi: SCARCE, smi: SCARCE },
+            sangareddy: { no2: ELEVATED, lst: CRITICAL, ndvi: STABLE, ndwi: MODERATE, smi: MODERATE },
+            siddipet: { no2: MODERATE, lst: ELEVATED, ndvi: OPTIMAL, ndwi: STABLE, smi: STABLE },
+            suryapet: { no2: MODERATE, lst: ELEVATED, ndvi: STABLE, ndwi: STABLE, smi: STABLE },
+            vikarabad: { no2: OPTIMAL, lst: MODERATE, ndvi: OPTIMAL, ndwi: MODERATE, smi: STABLE },
+            wanaparthy: { no2: STABLE, lst: ELEVATED, ndvi: MODERATE, ndwi: STABLE, smi: MODERATE },
+            warangal: { no2: MODERATE, lst: ELEVATED, ndvi: STABLE, ndwi: STABLE, smi: STABLE },
+            yadadri: { no2: ELEVATED, lst: ELEVATED, ndvi: MODERATE, ndwi: MODERATE, smi: MODERATE }
+        };
+
+        function updateDistrictTable() {
+            const selectedDistrict = document.getElementById("districtDropdown").value;
+            const data = districtDatabase[selectedDistrict];
+            const indicators = ['no2', 'lst', 'ndvi', 'ndwi', 'smi'];
+            
+            indicators.forEach(ind => {
+                const element = document.getElementById(`layer-${ind}`);
+                element.innerText = data[ind].text;
+                element.className = `px-2 py-0.5 rounded font-bold text-[10px] ${data[ind].style}`;
+            });
+        }
+
+        // Run immediately upon load to map baseline active selector variables
+        updateDistrictTable();
+    </script>
+</body>
+</html>
